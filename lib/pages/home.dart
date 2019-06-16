@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:intl/intl.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 
 class Home extends StatefulWidget {
   @override
@@ -9,20 +9,6 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
-  final formats = {
-    InputType.both: DateFormat("d MMMM, yyyy "),
-    InputType.date: DateFormat('dd-MM-yyyy'),
-  };
-
-  void updateInputType({bool date}) {
-    setState(() => inputType =
-        date ? InputType.both : InputType.date);
-  }
-
-  InputType inputType = InputType.both;
-  bool editable = true;
-  DateTime date;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,37 +39,26 @@ class HomeState extends State<Home> {
                 SizedBox(
                   height: 10.0,
                 ),
-                DateTimePickerFormField(
-                  inputType: inputType,
-                  format: formats[inputType],
-                  editable: editable,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.black45,
-                      labelText: 'Start Date',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                      hasFloatingPlaceholder: false),
-                  onChanged: (dt) => setState(() => date = dt),
+                
+                MaterialButton(
+                  
+                  color: Colors.cyan,
+                  onPressed: () async {
+                    final List<DateTime> picked =
+                        await DateRagePicker.showDatePicker(
+                            context: context,
+                            initialFirstDate: new DateTime.now(),
+                            initialLastDate:
+                                (new DateTime.now()).add(new Duration(days: 7)),
+                            firstDate: new DateTime(2015),
+                            lastDate: new DateTime(2020));
+                    if (picked != null && picked.length == 2) {
+                      print(picked);
+                    }
+                  },
+                  child: Text('Pick date range'),
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                DateTimePickerFormField(
-                  inputType: inputType,
-                  format: formats[inputType],
-                  editable: editable,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.black45,
-                      labelText: 'End Date',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                      hasFloatingPlaceholder: false),
-                  onChanged: (dt) => setState(() => date = dt),
-                ),
+                Text('test'),
               ],
             )),
       ),
