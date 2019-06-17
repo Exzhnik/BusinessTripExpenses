@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:intl/intl.dart';
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
 
 class Home extends StatefulWidget {
@@ -9,6 +8,23 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  List<DateTime> startDate = List();
+
+  Future<Null> _selectDate(BuildContext context) async {
+    final List<DateTime> picked = await DateRagePicker.showDatePicker(
+      context: context,
+      initialFirstDate: new DateTime.now(),
+      initialLastDate: (new DateTime.now()).add(new Duration(days: 7)),
+      firstDate: new DateTime(2015),
+      lastDate: new DateTime(2020),
+    );
+
+    if (picked != null && picked.length == 2)
+      setState(() {
+        startDate = picked;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,26 +55,11 @@ class HomeState extends State<Home> {
                 SizedBox(
                   height: 10.0,
                 ),
-                
-                MaterialButton(
-                  
-                  color: Colors.cyan,
-                  onPressed: () async {
-                    final List<DateTime> picked =
-                        await DateRagePicker.showDatePicker(
-                            context: context,
-                            initialFirstDate: new DateTime.now(),
-                            initialLastDate:
-                                (new DateTime.now()).add(new Duration(days: 7)),
-                            firstDate: new DateTime(2015),
-                            lastDate: new DateTime(2020));
-                    if (picked != null && picked.length == 2) {
-                      print(picked);
-                    }
-                  },
-                  child: Text('Pick date range'),
+                RaisedButton(
+                  onPressed: () => _selectDate(context),
+                  child: Text('Select Date'),
                 ),
-                Text('test'),
+                Text("${startDate.join()}"),
               ],
             )),
       ),
