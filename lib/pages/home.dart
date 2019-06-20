@@ -1,3 +1,6 @@
+import 'package:business_trip_expenses/pages/inputFields/abode.dart';
+import 'package:business_trip_expenses/pages/inputFields/businessTripNumber.dart';
+import 'package:business_trip_expenses/pages/inputFields/dailyAllowance.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:date_range_picker/date_range_picker.dart' as DateRagePicker;
@@ -28,6 +31,7 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Counting Finance'),
@@ -37,21 +41,18 @@ class HomeState extends State<Home> {
         onPressed: () {},
         child: Icon(Icons.add),
       ),
-      body: Container(
-        child: SingleChildScrollView(
-            padding: EdgeInsets.all(10.0),
+      body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * .03,
+                  right: 20.0,
+                  left: 20.0),
+          
+          child: Container(
+            
             child: Column(
               children: <Widget>[
-                TextFormField(
-                  textCapitalization: TextCapitalization.words,
-                  decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.black45,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                      hintText: 'Business Trip Number'),
-                ),
+                new BusinessTripNumber(),
                 SizedBox(
                   height: 10.0,
                 ),
@@ -60,9 +61,21 @@ class HomeState extends State<Home> {
                   child: Text('Select Date'),
                 ),
                 Text("${startDate.join()}"),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Row(
+                  children: <Widget>[
+                    Flexible(child: new DailyAllowance()),
+                    SizedBox(width:  MediaQuery.of(context).size.height * .03),
+                    Flexible(
+                      child: new Abode(),
+                    )
+                  ],
+                ),
               ],
-            )),
-      ),
+            ),
+          )),
     );
   }
 }
