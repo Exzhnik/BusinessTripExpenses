@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Abode extends StatelessWidget {
-  const Abode({
+class Earnings extends StatelessWidget {
+  const Earnings({
     Key key,
   }) : super(key: key);
 
@@ -15,7 +15,7 @@ class Abode extends StatelessWidget {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(6.0),
           ),
-          hintText: 'Money For Accommodation'),
+          hintText: 'Earnings'),
     );
   }
 }

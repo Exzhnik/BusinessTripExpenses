@@ -8,6 +8,7 @@ class DailyAllowance extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
           filled: true,
           fillColor: Colors.black45,
