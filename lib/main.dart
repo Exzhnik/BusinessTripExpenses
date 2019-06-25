@@ -1,6 +1,5 @@
 import 'package:business_trip_expenses/pages/home.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 
 void main() => runApp(MyApp());

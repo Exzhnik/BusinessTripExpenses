@@ -17,8 +17,8 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  animated_floatactionbuttons: ^0.1.0
   date_range_picker: ^1.0.6
-  datetime_picker_formfield: ^0.2.0
   dynamic_theme: ^1.0.1
   flutter:
     sdk: flutter
